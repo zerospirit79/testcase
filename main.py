@@ -1,23 +1,19 @@
 import requests
 import json
-
-def printing(data):
-    text = json.dumps(data, sort_keys=True, indent=8)
-    print(text)
-
-def p10_package(obj):
+#import pandas as pd
 
 
-request_url_sisyphus = 'https://rdb.altlinux.org/api/export/branch_binary_packages/sisyphus'
+first_method = 'sisyphus'
+request_url_sisyphus = 'https://rdb.altlinux.org/api/export/branch_binary_packages/' + first_method
 response = requests.get(request_url_sisyphus)
-sisyphus_json = response.json()
+sisyphus_text = response.text
+sisyphus_dict=json.loads(sisyphus_text)
+#print(sisyphus_dict['packages'])
 
-printing(sisyphus_json)
-
-request_url_p10 = 'https://rdb.altlinux.org/api/export/branch_binary_packages/p10'
+second_method = 'p10'
+request_url_p10 = 'https://rdb.altlinux.org/api/export/branch_binary_packages/' + second_method
 response = requests.get(request_url_p10)
-p10_json = response.json()
-
-printing(p10_json)
-
+p10_text = response.text
+p10_dict = json.loads(p10_text)
+print(p10_dict['packages'])
 
