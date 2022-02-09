@@ -8,6 +8,7 @@ request_url_sisyphus = 'https://rdb.altlinux.org/api/export/branch_binary_packag
 response_sisyphus = requests.get(request_url_sisyphus).text
 sisyphus_dict = json.loads(response_sisyphus)
 sisyphus_dictionary = sisyphus_dict['packages']
+print(sisyphus_dictionary)
 
 second_method = 'p10'
 request_url_p10 = 'https://rdb.altlinux.org/api/export/branch_binary_packages/' + second_method
@@ -35,9 +36,14 @@ for obj in p10_dictionary:
             break
 
 
+filename = 'p10_diff.json'
+with open(filename, 'w') as f:
+    json.dump(p10_diff, f)
 
-print(p10_diff)
-print(sisyphus_diff)
+filename = 'sisyphus_diff.json'
+with open(filename, 'w') as f:
+    json.dump(sisyphus_diff, f)
+
 '''
 for name in data_collection():
     p10_diff = []
