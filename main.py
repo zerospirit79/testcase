@@ -8,7 +8,7 @@ request_url_sisyphus = 'https://rdb.altlinux.org/api/export/branch_binary_packag
 response_sisyphus = requests.get(request_url_sisyphus).text
 sisyphus_dict = json.loads(response_sisyphus)
 sisyphus_dictionary = sisyphus_dict['packages']
-#print(sisyphus_dictionary)
+print('total package in sisyphus is: ' + str(len(sisyphus_dictionary)))
 
 
 second_method = 'p10'
@@ -16,6 +16,7 @@ request_url_p10 = 'https://rdb.altlinux.org/api/export/branch_binary_packages/' 
 response_p10 = requests.get(request_url_p10).text
 p10_dict = json.loads(response_p10)
 p10_dictionary = p10_dict['packages']
+print('total package in p10 is: ' + str(len(p10_dictionary)))
 
 p10_diff = []
 sisyphus_diff = []
@@ -38,15 +39,15 @@ for obj in p10_dictionary:
 
 sisyphus_version = []
 for obj in sisyphus_dictionary:
-    if obj['version'] != '':
+    if obj['version'] != str(0):
         sisyphus_version.append(obj)
     else:
         break
 
 
-print(len(p10_diff))
-print(len(sisyphus_diff))
-print(len(sisyphus_version))
+print('different package in p10 with sisyphus is: ' + str(len(p10_diff)))
+print('different package in sisyphus with p10 is: ' + str(len(sisyphus_diff)))
+print('packet with version in sisyphus is: ' + str(len(sisyphus_version)))
 filename = 'p10_diff.json'
 with open(filename, 'w') as f:
     json.dump(p10_diff, f)
