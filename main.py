@@ -8,7 +8,7 @@ request_url_sisyphus = 'https://rdb.altlinux.org/api/export/branch_binary_packag
 response_sisyphus = requests.get(request_url_sisyphus).text
 sisyphus_dict = json.loads(response_sisyphus)
 sisyphus_dictionary = sisyphus_dict['packages']
-print(sisyphus_dictionary)
+#print(sisyphus_dictionary)
 
 
 second_method = 'p10'
