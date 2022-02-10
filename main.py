@@ -10,6 +10,7 @@ sisyphus_dict = json.loads(response_sisyphus)
 sisyphus_dictionary = sisyphus_dict['packages']
 print(sisyphus_dictionary)
 
+
 second_method = 'p10'
 request_url_p10 = 'https://rdb.altlinux.org/api/export/branch_binary_packages/' + second_method
 response_p10 = requests.get(request_url_p10).text
@@ -35,7 +36,17 @@ for obj in p10_dictionary:
         else:
             break
 
+sisyphus_version = []
+for obj in sisyphus_dictionary:
+    if obj['version'] != '':
+        sisyphus_version.append(obj)
+    else:
+        break
 
+
+print(len(p10_diff))
+print(len(sisyphus_diff))
+print(len(sisyphus_version))
 filename = 'p10_diff.json'
 with open(filename, 'w') as f:
     json.dump(p10_diff, f)
@@ -44,6 +55,9 @@ filename = 'sisyphus_diff.json'
 with open(filename, 'w') as f:
     json.dump(sisyphus_diff, f)
 
+filename = 'sisyphus_version.json'
+with open(filename, 'w') as f:
+    json.dump(sisyphus_version, f)
 '''
 for name in data_collection():
     p10_diff = []
